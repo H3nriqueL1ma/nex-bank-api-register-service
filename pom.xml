@@ -34,6 +34,7 @@
 
     <modules>
         <module>register-service-core</module>
+        <module>register-service-services</module>
         <module>register-service-api</module>
     </modules>
 </project>
