@@ -9,4 +9,9 @@ module register.service.api {
     requires spring.beans;
     requires register.service.services;
     requires spring.context;
+    requires spring.tx;
+    requires org.aspectj.weaver;
+    requires spring.core;
+    requires static lombok;
+
 }

@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 @Service
 public class LoggerService {
 
-    public Logger getLoggerUtil(String className) {
+    public static Logger getLoggerUtil(String className) {
         return Logger.getLogger(className);
     };
 }

@@ -2,7 +2,9 @@ package com.github.h3nriquel1ma.registerserviceapi.DTO;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
 
+@Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RegisterClientDTO {
 
