@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>register-service-api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0.0</version>
 	<name>register-service-api</name>
 	<description>register-service-api</description>
 	<url/>

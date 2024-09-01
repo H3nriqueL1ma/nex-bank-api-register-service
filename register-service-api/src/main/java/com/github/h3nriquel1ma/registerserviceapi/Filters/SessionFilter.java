@@ -1,5 +1,6 @@
 package com.github.h3nriquel1ma.registerserviceapi.Filters;
 
+import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.LogInterface;
 import com.github.h3nriquel1ma.registerserviceservices.Services.Session.HttpSessionService;
 import com.github.h3nriquel1ma.registerserviceservices.Services.Utils.LoggerService;
 import io.micrometer.common.lang.NonNullApi;
@@ -10,24 +11,30 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.logging.Logger;
 
+@Component
 @NonNullApi
 @Order(1)
 public class SessionFilter extends OncePerRequestFilter {
 
     private final HttpSessionService httpSessionService;
+    private final LogInterface loggerService;
+
     @Autowired
-    public SessionFilter(LoggerService loggerService, HttpSessionService httpSessionService) {
+    public SessionFilter(HttpSessionService httpSessionService,
+                         LogInterface loggerService) {
         this.httpSessionService = httpSessionService;
+        this.loggerService = loggerService;
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        final Logger logger = LoggerService.getLoggerUtil(SessionFilter.class.getName());
+        final Logger logger = loggerService.getLogger(SessionFilter.class.getName());
 
         HttpSession session = request.getSession(false);
 

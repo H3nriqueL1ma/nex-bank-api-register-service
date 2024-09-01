@@ -2,8 +2,10 @@ package com.github.h3nriquel1ma.registerserviceapi.Controllers;
 
 import com.github.h3nriquel1ma.registerserviceapi.DTO.RegisterClientDTO;
 import com.github.h3nriquel1ma.registerserviceservices.Services.Session.HttpSessionService;
+import com.github.h3nriquel1ma.registerserviceservices.Services.Validation.ClientValidatorService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,13 +18,18 @@ import java.util.Map;
 public class RegisterController {
 
     private final HttpSessionService httpSessionService;
+    private final ClientValidatorService clientValidatorService;
 
-    public RegisterController(HttpSessionService httpSessionService) {
+    @Autowired
+    public RegisterController(HttpSessionService httpSessionService,
+                              ClientValidatorService clientValidatorService) {
         this.httpSessionService = httpSessionService;
+        this.clientValidatorService = clientValidatorService;
     }
 
-    public ResponseEntity<Object> registerSession(HttpSession session, @RequestBody @Valid RegisterClientDTO request) {
-        if (!isValidateRequestData(request)) {
+    public ResponseEntity<Object> registerSession(HttpSession session,
+                                                  @RequestBody @Valid RegisterClientDTO request) {
+        if (!clientValidatorService.isValidRequestData(request)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "Invalid Data!", "code", 400));
         }
 
