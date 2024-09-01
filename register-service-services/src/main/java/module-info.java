@@ -8,4 +8,5 @@ module register.service.services {
     exports com.github.h3nriquel1ma.registerserviceservices.Services.Session;
     exports com.github.h3nriquel1ma.registerserviceservices.Services.Utils;
     exports com.github.h3nriquel1ma.registerserviceservices.Services.Validation;
+    exports com.github.h3nriquel1ma.registerserviceservices.Services.Validation.SubServices;
 }

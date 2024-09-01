@@ -1,4 +1,4 @@
-package com.github.h3nriquel1ma.registerserviceservices.Services.Validation;
+package com.github.h3nriquel1ma.registerserviceservices.Services.Validation.SubServices;
 
 import com.github.h3nriquel1ma.registerserviceapi.DTO.RegisterClientDTO;
 import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.RequestValidatorInterface;
