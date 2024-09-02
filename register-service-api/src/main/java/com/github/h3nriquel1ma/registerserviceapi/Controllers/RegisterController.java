@@ -1,32 +1,40 @@
 package com.github.h3nriquel1ma.registerserviceapi.Controllers;
 
-import com.github.h3nriquel1ma.registerserviceapi.DTO.RegisterClientDTO;
+import com.github.h3nriquel1ma.registerserviceservices.Services.Query.ClientVerifyService;
 import com.github.h3nriquel1ma.registerserviceservices.Services.Session.HttpSessionService;
 import com.github.h3nriquel1ma.registerserviceservices.Services.Validation.ClientValidatorService;
+import com.github.h3nriquel1ma.registerserviceshared.DTO.RegisterClientDTO;
+import com.github.h3nriquel1ma.registerserviceshared.DTO.RegisterUserClientDTO;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
 @RestController
+@RequestMapping("/register")
 public class RegisterController {
 
     private final HttpSessionService httpSessionService;
     private final ClientValidatorService clientValidatorService;
+    private final ClientVerifyService clientVerifyService;
 
     @Autowired
     public RegisterController(HttpSessionService httpSessionService,
-                              ClientValidatorService clientValidatorService) {
+                              ClientValidatorService clientValidatorService, ClientVerifyService clientVerifyService) {
         this.httpSessionService = httpSessionService;
         this.clientValidatorService = clientValidatorService;
+        this.clientVerifyService = clientVerifyService;
     }
 
+    @PostMapping("/session")
     public ResponseEntity<Object> registerSession(HttpSession session,
                                                   @RequestBody @Valid RegisterClientDTO request) {
         if (!clientValidatorService.isValidRequestData(request)) {
@@ -34,7 +42,7 @@ public class RegisterController {
         }
 
         try {
-            if (isExistingClient(request)) {
+            if (clientVerifyService.isExistingClient(request)) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "Client already exists!", "code", 400));
             }
 
@@ -50,7 +58,8 @@ public class RegisterController {
         }
     }
 
-    public void registerClient(@RequestBody RegisterClientDTO request) {
+    @PostMapping("/client")
+    public void registerClient(@RequestBody RegisterUserClientDTO request) {
 
     }
 }

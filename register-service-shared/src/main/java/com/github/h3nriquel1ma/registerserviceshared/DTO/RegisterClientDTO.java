@@ -1,4 +1,4 @@
-package com.github.h3nriquel1ma.registerserviceapi.DTO;
+package com.github.h3nriquel1ma.registerserviceshared.DTO;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotNull;

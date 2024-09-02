@@ -1,8 +1,8 @@
 package com.github.h3nriquel1ma.registerserviceservices.Services.Validation;
 
-import com.github.h3nriquel1ma.registerserviceapi.DTO.RegisterClientDTO;
 import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.RequestValidatorInterface;
 import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.ValidatorInterface;
+import com.github.h3nriquel1ma.registerserviceshared.DTO.RegisterClientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

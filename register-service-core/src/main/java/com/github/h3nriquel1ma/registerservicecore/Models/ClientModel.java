@@ -1,7 +1,6 @@
 package com.github.h3nriquel1ma.registerservicecore.Models;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
