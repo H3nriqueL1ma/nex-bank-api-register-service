@@ -1,30 +1,32 @@
 package com.github.h3nriquel1ma.registerserviceservices.Services.Query.SubServices;
 
-import com.github.h3nriquel1ma.registerservicecore.Models.ClientModel;
-import com.github.h3nriquel1ma.registerservicecore.Repositories.ClientRepository;
+import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.CheckClientInterface;
 import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.VerifyInterface;
+import com.github.h3nriquel1ma.registerserviceservices.Services.Hashing.HashingService;
 import com.github.h3nriquel1ma.registerserviceshared.DTO.RegisterClientDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
+// Serviço de verificação de clientes criptografando os dados.
 @Service
 public class ClientInfoDataService implements VerifyInterface {
 
-    private final ClientRepository clientRepository;
+    private final CheckClientInterface checkClientExistenceService;
+    private final HashingService hashingService;
 
-    public ClientInfoDataService(ClientRepository clientRepository) {
-        this.clientRepository = clientRepository;
+    @Autowired
+    public ClientInfoDataService(CheckClientInterface checkClientExistenceService,
+                                 HashingService hashingService) {
+        this.checkClientExistenceService = checkClientExistenceService;
+        this.hashingService = hashingService;
     }
 
     @Override
     public Boolean verifyInfoData(RegisterClientDTO request) {
-        Optional<ClientModel> optionalClientCPF = this.clientRepository.findByClientCPF(request.getCPF_cliente());
-        Optional<ClientModel> optionalClientEmail = this.clientRepository.findByClientEmail(request.getEmail_cliente());
-        Optional<ClientModel> optionalClientPhone = this.clientRepository.findByClientPhone(request.getCelular_cliente());
-
-        return optionalClientCPF.isPresent() ||
-                optionalClientEmail.isPresent() ||
-                optionalClientPhone.isPresent();
+        return checkClientExistenceService.check(
+                hashingService.hashData(request.getCPF_cliente()),
+                hashingService.hashData(request.getEmail_cliente()),
+                hashingService.hashData(request.getCelular_cliente())
+        );
     }
 }

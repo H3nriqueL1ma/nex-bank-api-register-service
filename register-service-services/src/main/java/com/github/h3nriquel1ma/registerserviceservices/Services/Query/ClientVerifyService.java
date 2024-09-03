@@ -4,6 +4,7 @@ import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.VerifyInte
 import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.VerifyUserInterface;
 import com.github.h3nriquel1ma.registerserviceshared.DTO.RegisterClientDTO;
 import com.github.h3nriquel1ma.registerserviceshared.DTO.RegisterUserClientDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,6 +13,7 @@ public class ClientVerifyService {
     private final VerifyInterface clientInfoDataService;
     private final VerifyUserInterface clientUserDataService;
 
+    @Autowired
     public ClientVerifyService(VerifyInterface clientInfoDataService,
                                VerifyUserInterface clientUserDataService) {
         this.clientInfoDataService = clientInfoDataService;

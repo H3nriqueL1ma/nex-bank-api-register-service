@@ -6,8 +6,9 @@ import com.github.h3nriquel1ma.registerserviceshared.DTO.RegisterClientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+// Serviço geral de validação de cliente.
 @Service
-public class ClientValidatorService {
+public class ClientValidatorRequestService {
 
     private final ValidatorInterface<String> emailValidatorService;
     private final ValidatorInterface<String> phoneNumberValidatorService;
@@ -15,10 +16,10 @@ public class ClientValidatorService {
     private final RequestValidatorInterface checkValueValidatorService;
 
     @Autowired
-    public ClientValidatorService(ValidatorInterface<String> emailValidatorService,
-                                  ValidatorInterface<String> phoneNumberValidatorService,
-                                  RequestValidatorInterface emptyAttributesValidatorService,
-                                  RequestValidatorInterface checkValueValidatorService) {
+    public ClientValidatorRequestService(ValidatorInterface<String> emailValidatorService,
+                                         ValidatorInterface<String> phoneNumberValidatorService,
+                                         RequestValidatorInterface emptyAttributesValidatorService,
+                                         RequestValidatorInterface checkValueValidatorService) {
         this.emailValidatorService = emailValidatorService;
         this.phoneNumberValidatorService = phoneNumberValidatorService;
         this.emptyAttributesValidatorService = emptyAttributesValidatorService;

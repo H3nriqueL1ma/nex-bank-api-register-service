@@ -4,6 +4,9 @@ module register.service.services {
     requires spring.beans;
     requires org.apache.tomcat.embed.core;
     requires register.service.shared;
+    requires spring.security.crypto;
+    requires spring.core;
+    requires org.apache.commons.codec;
 
     exports com.github.h3nriquel1ma.registerserviceservices.Services.Session;
     exports com.github.h3nriquel1ma.registerserviceservices.Services.Utils;

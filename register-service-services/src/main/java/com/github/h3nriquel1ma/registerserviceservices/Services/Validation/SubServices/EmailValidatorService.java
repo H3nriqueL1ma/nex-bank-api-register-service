@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+// Serviço de validação de Email.
 @Service
 public class EmailValidatorService implements ValidatorInterface<String> {
 

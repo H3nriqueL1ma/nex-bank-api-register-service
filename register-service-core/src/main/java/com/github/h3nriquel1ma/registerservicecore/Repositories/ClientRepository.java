@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 import java.util.UUID;
 
+// Repositório para buscar clientes com base em CPF, Email ou Telefone.
 public interface ClientRepository extends JpaRepository<ClientModel, UUID> {
     Optional<ClientModel> findByClientCPF(String cpf);
     Optional<ClientModel> findByClientEmail(String email);

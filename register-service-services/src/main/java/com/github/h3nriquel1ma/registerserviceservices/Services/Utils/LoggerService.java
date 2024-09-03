@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.logging.Logger;
 
+// Serviço de retorno do serviço de Logger.
 @Service
 public class LoggerService implements LogInterface {
 

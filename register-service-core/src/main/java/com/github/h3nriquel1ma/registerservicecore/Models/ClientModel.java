@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.util.UUID;
 
+// Entidade de modelagem do cliente.
 @Entity
 @Getter
 @Setter
@@ -30,4 +31,10 @@ public class ClientModel {
 
     @Column(name = "client_birth_date")
     private String clientBirthDate;
+
+    @Column(name = "client_username")
+    private String clientUserName;
+
+    @Column(name = "client_password")
+    private String clientPassword;
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
+// Serviço de validação de número de Telefone em formato brasileiro.
 @Service
 public class PhoneNumberValidatorService implements ValidatorInterface<String> {
 

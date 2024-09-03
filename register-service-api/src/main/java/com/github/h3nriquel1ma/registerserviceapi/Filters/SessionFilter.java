@@ -17,6 +17,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.logging.Logger;
 
+
+// Filtro de Sessão para verificar se a sessão é nula antes de prosseguir para a rota de registro.
 @Component
 @NonNullApi
 @Order(1)
