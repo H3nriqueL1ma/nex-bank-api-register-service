@@ -1,6 +1,6 @@
 package com.github.h3nriquel1ma.registerserviceservices.Services.Hashing.SubServices;
 
-import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.HashInterface;
+import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Hashing.HashInterface;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

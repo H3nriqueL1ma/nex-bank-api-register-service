@@ -1,7 +1,6 @@
 package com.github.h3nriquel1ma.registerserviceservices.Services.Query;
 
-import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.VerifyInterface;
-import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.VerifyUserInterface;
+import com.github.h3nriquel1ma.registerservicecore.Query.VerifyInterface;
 import com.github.h3nriquel1ma.registerserviceshared.DTO.RegisterClientDTO;
 import com.github.h3nriquel1ma.registerserviceshared.DTO.RegisterUserClientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +9,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class ClientVerifyService {
 
-    private final VerifyInterface clientInfoDataService;
-    private final VerifyUserInterface clientUserDataService;
+    private final VerifyInterface<RegisterClientDTO> clientInfoDataService;
+    private final VerifyInterface<RegisterUserClientDTO> clientUserDataService;
 
     @Autowired
-    public ClientVerifyService(VerifyInterface clientInfoDataService,
-                               VerifyUserInterface clientUserDataService) {
+    public ClientVerifyService(VerifyInterface<RegisterClientDTO> clientInfoDataService,
+                               VerifyInterface<RegisterUserClientDTO> clientUserDataService) {
         this.clientInfoDataService = clientInfoDataService;
         this.clientUserDataService = clientUserDataService;
     }
@@ -25,7 +24,7 @@ public class ClientVerifyService {
             return false;
         }
 
-        return clientInfoDataService.verifyInfoData(request);
+        return clientInfoDataService.verifyData(request);
     }
 
     public Boolean isExistingClient(RegisterUserClientDTO request) {
@@ -33,6 +32,6 @@ public class ClientVerifyService {
             return false;
         }
 
-        return clientUserDataService.verifyUserData(request);
+        return clientUserDataService.verifyData(request);
     }
 }

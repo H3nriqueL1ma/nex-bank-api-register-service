@@ -1,8 +1,7 @@
 package com.github.h3nriquel1ma.registerserviceapi.Filters;
 
-import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.LogInterface;
+import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Utils.LogInterface;
 import com.github.h3nriquel1ma.registerserviceservices.Services.Session.HttpSessionService;
-import com.github.h3nriquel1ma.registerserviceservices.Services.Utils.LoggerService;
 import io.micrometer.common.lang.NonNullApi;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

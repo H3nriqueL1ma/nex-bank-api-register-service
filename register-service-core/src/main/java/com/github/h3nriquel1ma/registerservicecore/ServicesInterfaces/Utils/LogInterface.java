@@ -1,4 +1,4 @@
-package com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces;
+package com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Utils;
 
 import java.util.logging.Logger;
 

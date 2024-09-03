@@ -1,6 +1,6 @@
 package com.github.h3nriquel1ma.registerserviceservices.Services.Validation.SubServices;
 
-import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.ValidatorInterface;
+import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Validation.ValidatorInterface;
 import org.springframework.stereotype.Service;
 
 import java.net.InetAddress;

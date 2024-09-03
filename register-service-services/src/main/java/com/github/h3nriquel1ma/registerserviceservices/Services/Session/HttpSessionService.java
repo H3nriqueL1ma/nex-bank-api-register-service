@@ -1,13 +1,15 @@
 package com.github.h3nriquel1ma.registerserviceservices.Services.Session;
 
-import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.SessionInterface;
+import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Session.AttributeSessionInterface;
+import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Session.DataSessionInterface;
+import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Session.HttpSessionInterface;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class HttpSessionService implements SessionInterface {
+public class HttpSessionService implements HttpSessionInterface, DataSessionInterface<Object>, AttributeSessionInterface<String, Object> {
     private final HttpSession session;
 
     @Autowired
@@ -35,13 +37,18 @@ public class HttpSessionService implements SessionInterface {
     }
 
     @Override
-    public void createAttributeSession(String attributeId, Object data) {
+    public void createAttributeSession(String attributeId, String data) {
         session.setAttribute(attributeId, data);
     }
 
     @Override
     public Object getAttributeSession(String attributeId) {
-        return null;
+        return session.getAttribute(attributeId);
+    }
+
+    @Override
+    public void invalidateAttributeSession(String attributeId) {
+
     }
 
     @Override

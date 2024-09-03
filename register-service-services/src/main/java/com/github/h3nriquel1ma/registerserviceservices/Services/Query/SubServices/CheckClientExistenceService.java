@@ -1,13 +1,13 @@
 package com.github.h3nriquel1ma.registerserviceservices.Services.Query.SubServices;
 
 import com.github.h3nriquel1ma.registerservicecore.Repositories.ClientRepository;
-import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.CheckClientInterface;
+import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Validation.CheckInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 // Serviço de verificação de clientes com base em dados criptografados (CPF, Email ou Telefone).
 @Service
-public class CheckClientExistenceService implements CheckClientInterface {
+public class CheckClientExistenceService implements CheckInterface<String> {
 
     private final ClientRepository clientRepository;
 
@@ -17,9 +17,9 @@ public class CheckClientExistenceService implements CheckClientInterface {
     }
 
     @Override
-    public Boolean check(String hashedCPF, String hashedEmail, String hashedPhone) {
-        return this.clientRepository.findByClientCPF(hashedCPF).isPresent() ||
-                this.clientRepository.findByClientEmail(hashedEmail).isPresent() ||
-                this.clientRepository.findByClientPhone(hashedPhone).isPresent();
+    public Boolean check(String... parameters) {
+        return this.clientRepository.findByClientCPF(parameters[0]).isPresent() ||
+                this.clientRepository.findByClientEmail(parameters[1]).isPresent() ||
+                this.clientRepository.findByClientPhone(parameters[2]).isPresent();
     }
 }

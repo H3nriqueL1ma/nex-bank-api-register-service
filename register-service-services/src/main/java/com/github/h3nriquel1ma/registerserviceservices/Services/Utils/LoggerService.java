@@ -1,6 +1,6 @@
 package com.github.h3nriquel1ma.registerserviceservices.Services.Utils;
 
-import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.LogInterface;
+import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Utils.LogInterface;
 import org.springframework.stereotype.Service;
 
 import java.util.logging.Logger;

@@ -1,6 +1,6 @@
 package com.github.h3nriquel1ma.registerserviceservices.Services.Validation;
 
-import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.UserValidatorInterface;
+import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Validation.ValidatorInterface;
 import com.github.h3nriquel1ma.registerserviceshared.DTO.RegisterUserClientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class ClientValidatorUserService {
 
-    private final UserValidatorInterface emptyAttributesUserValidatorService;
+    private final ValidatorInterface<RegisterUserClientDTO> emptyAttributesUserValidatorService;
 
     @Autowired
-    public ClientValidatorUserService(UserValidatorInterface emptyAttributesUserValidatorService) {
+    public ClientValidatorUserService(ValidatorInterface<RegisterUserClientDTO> emptyAttributesUserValidatorService) {
         this.emptyAttributesUserValidatorService = emptyAttributesUserValidatorService;
     }
 
