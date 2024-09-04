@@ -1,7 +1,9 @@
 package com.github.h3nriquel1ma.registerserviceapi.Controllers;
 
+import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Session.AttributeSessionInterface;
+import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Session.DataSessionInterface;
 import com.github.h3nriquel1ma.registerserviceservices.Services.Query.ClientVerifyService;
-import com.github.h3nriquel1ma.registerserviceservices.Services.Session.HttpSessionService;
+import com.github.h3nriquel1ma.registerserviceservices.Services.Session.DataSessionService;
 import com.github.h3nriquel1ma.registerserviceservices.Services.Validation.ClientValidatorRequestService;
 import com.github.h3nriquel1ma.registerserviceservices.Services.Validation.ClientValidatorUserService;
 import com.github.h3nriquel1ma.registerserviceshared.DTO.RegisterClientDTO;
@@ -24,15 +26,20 @@ import java.util.Map;
 @RequestMapping("/register")
 public class RegisterController {
 
-    private final HttpSessionService httpSessionService;
+    private final DataSessionInterface<Object> dataSessionService;
+    private final AttributeSessionInterface<String> attributeSessionService;
     private final ClientValidatorRequestService clientValidatorRequestService;
     private final ClientVerifyService clientVerifyService;
     private final ClientValidatorUserService clientValidatorUserService;
 
     @Autowired
-    public RegisterController(HttpSessionService httpSessionService,
-                              ClientValidatorRequestService clientValidatorRequestService, ClientVerifyService clientVerifyService, ClientValidatorUserService clientValidatorUserService) {
-        this.httpSessionService = httpSessionService;
+    public RegisterController(DataSessionInterface<Object> dataSessionService,
+                              AttributeSessionInterface<String> attributeSessionService,
+                              ClientValidatorRequestService clientValidatorRequestService,
+                              ClientVerifyService clientVerifyService,
+                              ClientValidatorUserService clientValidatorUserService) {
+        this.dataSessionService = dataSessionService;
+        this.attributeSessionService = attributeSessionService;
         this.clientValidatorRequestService = clientValidatorRequestService;
         this.clientVerifyService = clientVerifyService;
         this.clientValidatorUserService = clientValidatorUserService;
@@ -52,12 +59,12 @@ public class RegisterController {
             }
 
             // Guardando os dados inteiros da requisição em uma sessão especificada pelo CPF do cliente.
-            httpSessionService.createSession("user_" + request.getCPF_cliente(), request);
+            dataSessionService.createDataSession("user_" + request.getCPF_cliente(), request);
 
             // Guardando o CPF do cliente.
-            httpSessionService.createAttributeSession("user_cpf", request.getCPF_cliente());
+            attributeSessionService.createAttributeSession("user_cpf", request.getCPF_cliente());
 
-            return ResponseEntity.status(HttpStatus.OK).body(Map.of("message", "Session created sucessfully!", "code", 201));
+            return ResponseEntity.status(HttpStatus.OK).body(Map.of("message", "Session created successfully!", "code", 201));
         } catch (DataAccessException error) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("message", "An error occurred connecting to the database!", "code", 500));
 
@@ -78,6 +85,8 @@ public class RegisterController {
             }
 
 
+
+            return ResponseEntity.status(HttpStatus.OK).body(Map.of("message", "Client created successfully!", "code", 201));
         } catch (DataAccessException error) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("message", "An error occurred connecting to the database!", "code", 500));
         } catch (RuntimeException error) {

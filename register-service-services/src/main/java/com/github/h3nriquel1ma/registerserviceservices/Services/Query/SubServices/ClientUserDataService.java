@@ -4,6 +4,7 @@ import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Validation
 import com.github.h3nriquel1ma.registerservicecore.Query.VerifyInterface;
 import com.github.h3nriquel1ma.registerserviceservices.Services.Hashing.HashingService;
 import com.github.h3nriquel1ma.registerserviceshared.DTO.RegisterUserClientDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 // Serviço de verificação de dados de Usuário.
@@ -13,6 +14,7 @@ public class ClientUserDataService implements VerifyInterface<RegisterUserClient
     private final CheckInterface<String> checkClientUserExistenceService;
     private final HashingService hashingService;
 
+    @Autowired
     public ClientUserDataService(CheckInterface<String> checkClientUserExistenceService,
                                  HashingService hashingService) {
         this.checkClientUserExistenceService = checkClientUserExistenceService;

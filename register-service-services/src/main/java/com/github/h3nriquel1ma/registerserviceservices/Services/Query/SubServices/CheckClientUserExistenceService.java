@@ -2,6 +2,7 @@ package com.github.h3nriquel1ma.registerserviceservices.Services.Query.SubServic
 
 import com.github.h3nriquel1ma.registerservicecore.Repositories.ClientUserRepository;
 import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Validation.CheckInterface;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -9,6 +10,7 @@ public class CheckClientUserExistenceService implements CheckInterface<String> {
 
     private final ClientUserRepository clientUserRepository;
 
+    @Autowired
     public CheckClientUserExistenceService(ClientUserRepository clientUserRepository) {
         this.clientUserRepository = clientUserRepository;
     }
