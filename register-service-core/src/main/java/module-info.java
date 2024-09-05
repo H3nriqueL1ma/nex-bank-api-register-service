@@ -12,4 +12,5 @@ module register.service.core {
     exports com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Hashing;
     exports com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Validation;
     exports com.github.h3nriquel1ma.registerservicecore.Query;
+    exports com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Registration;
 }

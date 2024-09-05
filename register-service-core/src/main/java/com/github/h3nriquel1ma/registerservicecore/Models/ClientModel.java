@@ -1,7 +1,10 @@
 package com.github.h3nriquel1ma.registerservicecore.Models;
 
+import com.github.h3nriquel1ma.registerserviceshared.DTO.RegisterClientDTO;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.UUID;
@@ -10,6 +13,8 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ClientModel {
 
     @Id
@@ -37,4 +42,14 @@ public class ClientModel {
 
     @Column(name = "client_password")
     private String clientPassword;
+
+    public ClientModel(RegisterClientDTO data, String username, String password) {
+        this.clientFullName = data.getNome_cliente();
+        this.clientCPF = data.getCPF_cliente();
+        this.clientEmail = data.getEmail_cliente();
+        this.clientPhone = data.getCelular_cliente();
+        this.clientBirthDate = data.getData_nascimento_cliente();
+        this.clientUserName = username;
+        this.clientPassword = password;
+    }
 }

@@ -25,7 +25,12 @@ public class DataSessionService implements DataSessionInterface<Object> {
     }
 
     @Override
-    public void invalidateSession() {
-        session.invalidate();
+    public void invalidateSession(String id) {
+        session.removeAttribute(id);
+    }
+
+    @Override
+    public Boolean verify(Object data) {
+        return data == null;
     }
 }
