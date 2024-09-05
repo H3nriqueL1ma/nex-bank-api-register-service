@@ -1,7 +1,9 @@
 package com.github.h3nriquel1ma.registerserviceapi.Controllers;
 
+import com.github.h3nriquel1ma.registerservicecore.Query.DualVerifyInterface;
 import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Session.AttributeSessionInterface;
 import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Session.DataSessionInterface;
+import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Validation.ValidatorInterface;
 import com.github.h3nriquel1ma.registerserviceservices.Services.Query.ClientVerifyService;
 import com.github.h3nriquel1ma.registerserviceservices.Services.Session.DataSessionService;
 import com.github.h3nriquel1ma.registerserviceservices.Services.Validation.ClientValidatorRequestService;
@@ -28,16 +30,16 @@ public class RegisterController {
 
     private final DataSessionInterface<Object> dataSessionService;
     private final AttributeSessionInterface<String> attributeSessionService;
-    private final ClientValidatorRequestService clientValidatorRequestService;
-    private final ClientVerifyService clientVerifyService;
-    private final ClientValidatorUserService clientValidatorUserService;
+    private final ValidatorInterface<RegisterClientDTO> clientValidatorRequestService;
+    private final DualVerifyInterface<RegisterClientDTO, RegisterUserClientDTO> clientVerifyService;
+    private final ValidatorInterface<RegisterUserClientDTO> clientValidatorUserService;
 
     @Autowired
     public RegisterController(DataSessionInterface<Object> dataSessionService,
                               AttributeSessionInterface<String> attributeSessionService,
-                              ClientValidatorRequestService clientValidatorRequestService,
-                              ClientVerifyService clientVerifyService,
-                              ClientValidatorUserService clientValidatorUserService) {
+                              ValidatorInterface<RegisterClientDTO> clientValidatorRequestService,
+                              DualVerifyInterface<RegisterClientDTO, RegisterUserClientDTO> clientVerifyService,
+                              ValidatorInterface<RegisterUserClientDTO> clientValidatorUserService) {
         this.dataSessionService = dataSessionService;
         this.attributeSessionService = attributeSessionService;
         this.clientValidatorRequestService = clientValidatorRequestService;
@@ -49,12 +51,12 @@ public class RegisterController {
     @PostMapping("/session")
     public ResponseEntity<Object> registerSession(HttpSession session,
                                                   @RequestBody @Valid RegisterClientDTO request) {
-        if (!clientValidatorRequestService.isValidRequestData(request)) {
+        if (!clientValidatorRequestService.isValid(request)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "Invalid Data!", "code", 400));
         }
 
         try {
-            if (clientVerifyService.isExistingClient(request)) {
+            if (clientVerifyService.isExisting(request)) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "Client already exists!", "code", 400));
             }
 
@@ -75,12 +77,12 @@ public class RegisterController {
 
     @PostMapping("/client")
     public ResponseEntity<Object> registerClient(HttpSession session, @RequestBody RegisterUserClientDTO request) {
-        if (!clientValidatorUserService.isValidUserData(request)) {
+        if (!clientValidatorUserService.isValid(request)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "Invalid Data!", "code", 400));
         }
 
         try {
-            if (clientVerifyService.isExistingClient(request)) {
+            if (clientVerifyService.isExisting_(request)) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "Client User already exists!", "code", 400));
             }
 

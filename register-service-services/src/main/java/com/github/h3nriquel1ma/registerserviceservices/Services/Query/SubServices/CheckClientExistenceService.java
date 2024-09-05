@@ -5,7 +5,7 @@ import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Validation
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-// Serviço de verificação de clientes com base em dados criptografados (CPF, Email ou Telefone).
+// Serviço de verificação de clientes com base em dados de registro.
 @Service
 public class CheckClientExistenceService implements CheckInterface<String> {
 

@@ -5,6 +5,7 @@ import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Validation
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+// Serviço de verificação com bases em dados de usuário.
 @Service
 public class CheckClientUserExistenceService implements CheckInterface<String> {
 

@@ -4,6 +4,7 @@ import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Session.At
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 
+// Serviço de sessões para atributos.
 @Service
 public class AttributeSessionService implements AttributeSessionInterface<String> {
 

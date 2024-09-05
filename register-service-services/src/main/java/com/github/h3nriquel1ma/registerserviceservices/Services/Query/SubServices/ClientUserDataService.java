@@ -1,5 +1,6 @@
 package com.github.h3nriquel1ma.registerserviceservices.Services.Query.SubServices;
 
+import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Hashing.DualHashInterface;
 import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Validation.CheckInterface;
 import com.github.h3nriquel1ma.registerservicecore.Query.VerifyInterface;
 import com.github.h3nriquel1ma.registerserviceservices.Services.Hashing.HashingService;
@@ -12,20 +13,20 @@ import org.springframework.stereotype.Service;
 public class ClientUserDataService implements VerifyInterface<RegisterUserClientDTO> {
 
     private final CheckInterface<String> checkClientUserExistenceService;
-    private final HashingService hashingService;
+    private final DualHashInterface hashingService;
 
     @Autowired
     public ClientUserDataService(CheckInterface<String> checkClientUserExistenceService,
-                                 HashingService hashingService) {
+                                 DualHashInterface hashingService) {
         this.checkClientUserExistenceService = checkClientUserExistenceService;
         this.hashingService = hashingService;
     }
 
     @Override
-    public Boolean verifyData(RegisterUserClientDTO request) {
+    public Boolean isExisting(RegisterUserClientDTO request) {
         return checkClientUserExistenceService.check(
-                hashingService.hashData(request.getNome_usuario()),
-                hashingService.hashPassword(request.getSenha_usuario())
+                hashingService.hash(request.getNome_usuario()),
+                hashingService.hash_(request.getSenha_usuario())
         );
     }
 }

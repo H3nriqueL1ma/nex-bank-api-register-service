@@ -1,5 +1,7 @@
 package com.github.h3nriquel1ma.registerserviceapi.Filters;
 
+import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Session.HttpSessionInterface;
+import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Session.HttpSessionVerifyInterface;
 import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Utils.LogInterface;
 import io.micrometer.common.lang.NonNullApi;
 import jakarta.servlet.FilterChain;
@@ -22,13 +24,13 @@ import java.util.logging.Logger;
 @Order(1)
 public class SessionFilter extends OncePerRequestFilter {
 
-    private final HttpSessionService httpSessionService;
+    private final HttpSessionVerifyInterface httpSessionVerifyService;
     private final LogInterface loggerService;
 
     @Autowired
-    public SessionFilter(HttpSessionService httpSessionService,
+    public SessionFilter(HttpSessionVerifyInterface httpSessionVerifyService,
                          LogInterface loggerService) {
-        this.httpSessionService = httpSessionService;
+        this.httpSessionVerifyService = httpSessionVerifyService;
         this.loggerService = loggerService;
     }
 
@@ -38,7 +40,7 @@ public class SessionFilter extends OncePerRequestFilter {
 
         HttpSession session = request.getSession(false);
 
-        if (httpSessionService.isNullSession(session)) {
+        if (httpSessionVerifyService.isNullSession(session)) {
             logger.warning("Null session!");
             response.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }

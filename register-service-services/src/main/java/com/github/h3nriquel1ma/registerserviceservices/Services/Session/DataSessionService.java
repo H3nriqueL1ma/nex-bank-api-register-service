@@ -4,6 +4,7 @@ import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Session.Da
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 
+// Serviços de sessões para dados em objeto.
 @Service
 public class DataSessionService implements DataSessionInterface<Object> {
 

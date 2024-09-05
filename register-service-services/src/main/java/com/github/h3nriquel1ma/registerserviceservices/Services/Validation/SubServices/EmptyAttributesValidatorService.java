@@ -4,7 +4,7 @@ import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Validation
 import com.github.h3nriquel1ma.registerserviceshared.DTO.RegisterClientDTO;
 import org.springframework.stereotype.Service;
 
-// Serviço de validação para verificar atributos vazios na requisição.
+// Serviço de validação para verificar atributos vazios de registro na requisição.
 @Service
 public class EmptyAttributesValidatorService implements ValidatorInterface<RegisterClientDTO> {
 

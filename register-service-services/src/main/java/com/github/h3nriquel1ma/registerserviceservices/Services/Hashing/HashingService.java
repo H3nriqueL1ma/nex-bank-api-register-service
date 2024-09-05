@@ -1,12 +1,13 @@
 package com.github.h3nriquel1ma.registerserviceservices.Services.Hashing;
 
+import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Hashing.DualHashInterface;
 import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Hashing.HashInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 // Serviço geral de hashing.
 @Service
-public class HashingService {
+public class HashingService implements DualHashInterface {
 
     private final HashInterface hashingDataService;
     private final HashInterface hashingPasswordService;
@@ -17,11 +18,13 @@ public class HashingService {
         this.hashingPasswordService = hashingPasswordService;
     }
 
-    public String hashData(String data) {
+    @Override
+    public String hash(String data) {
         return hashingDataService.hash(data);
     }
 
-    public String hashPassword(String password) {
+    @Override
+    public String hash_(String password) {
         return hashingPasswordService.hash(password);
     }
 }

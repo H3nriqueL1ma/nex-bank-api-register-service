@@ -5,8 +5,9 @@ import com.github.h3nriquel1ma.registerserviceshared.DTO.RegisterUserClientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+// Serviço de validação de dados de usuário do cliente.
 @Service
-public class ClientValidatorUserService {
+public class ClientValidatorUserService implements ValidatorInterface<RegisterUserClientDTO> {
 
     private final ValidatorInterface<RegisterUserClientDTO> emptyAttributesUserValidatorService;
 
@@ -15,7 +16,8 @@ public class ClientValidatorUserService {
         this.emptyAttributesUserValidatorService = emptyAttributesUserValidatorService;
     }
 
-    public Boolean isValidUserData(RegisterUserClientDTO request) {
+    @Override
+    public Boolean isValid(RegisterUserClientDTO request) {
         if (request == null) {
             return false;
         }

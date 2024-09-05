@@ -1,8 +1,8 @@
 package com.github.h3nriquel1ma.registerserviceservices.Services.Query.SubServices;
 
+import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Hashing.DualHashInterface;
 import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Validation.CheckInterface;
 import com.github.h3nriquel1ma.registerservicecore.Query.VerifyInterface;
-import com.github.h3nriquel1ma.registerserviceservices.Services.Hashing.HashingService;
 import com.github.h3nriquel1ma.registerserviceshared.DTO.RegisterClientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,21 +12,21 @@ import org.springframework.stereotype.Service;
 public class ClientInfoDataService implements VerifyInterface<RegisterClientDTO> {
 
     private final CheckInterface<String> checkClientExistenceService;
-    private final HashingService hashingService;
+    private final DualHashInterface hashingService;
 
     @Autowired
     public ClientInfoDataService(CheckInterface<String> checkClientExistenceService,
-                                 HashingService hashingService) {
+                                 DualHashInterface hashingService) {
         this.checkClientExistenceService = checkClientExistenceService;
         this.hashingService = hashingService;
     }
 
     @Override
-    public Boolean verifyData(RegisterClientDTO request) {
+    public Boolean isExisting(RegisterClientDTO request) {
         return checkClientExistenceService.check(
-                hashingService.hashData(request.getCPF_cliente()),
-                hashingService.hashData(request.getEmail_cliente()),
-                hashingService.hashData(request.getCelular_cliente())
+                hashingService.hash(request.getCPF_cliente()),
+                hashingService.hash(request.getEmail_cliente()),
+                hashingService.hash(request.getCelular_cliente())
         );
     }
 }
