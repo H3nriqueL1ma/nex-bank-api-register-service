@@ -1,4 +1,4 @@
-module register.service.shared {
+open module register.service.shared {
     requires static lombok;
     requires com.fasterxml.jackson.annotation;
     requires jakarta.validation;

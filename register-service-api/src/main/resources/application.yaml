@@ -1,9 +1,24 @@
 spring:
   application:
     name: register-service
+  datasource:
+    url: jdbc:postgresql://postgresql-server-database.postgres.database.azure.com:5432/nexbank-register-microservice
+    username: postgres_database_admin
+    password: xA6asdnpT8Ayh2Q
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
 
 server:
   port: 8010
+  compression:
+    enabled: true
+    mime-types: application/json
+    min-response-size: 1024
 
 eureka:
   client:

@@ -1,9 +1,11 @@
-module register.service.core {
+open module register.service.core {
     requires org.apache.tomcat.embed.core;
     requires spring.data.jpa;
     requires jakarta.persistence;
     requires static lombok;
     requires register.service.shared;
+    requires spring.context;
+    requires org.hibernate.orm.core;
 
     exports com.github.h3nriquel1ma.registerservicecore.Repositories;
     exports com.github.h3nriquel1ma.registerservicecore.Models;

@@ -1,4 +1,4 @@
-module register.service.api {
+open module register.service.api {
     requires spring.boot;
     requires spring.boot.autoconfigure;
     requires spring.web;
@@ -13,5 +13,6 @@ module register.service.api {
     requires org.apache.tomcat.embed.core;
     requires register.service.shared;
     requires jakarta.validation;
+    requires spring.data.jpa;
 
 }

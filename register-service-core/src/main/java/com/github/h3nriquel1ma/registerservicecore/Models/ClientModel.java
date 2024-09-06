@@ -11,6 +11,7 @@ import java.util.UUID;
 
 // Entidade de modelagem do cliente.
 @Entity
+@Table(name = "clients")
 @Getter
 @Setter
 @AllArgsConstructor

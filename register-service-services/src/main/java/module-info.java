@@ -1,4 +1,4 @@
-module register.service.services {
+open module register.service.services {
     requires register.service.core;
     requires spring.context;
     requires spring.beans;
