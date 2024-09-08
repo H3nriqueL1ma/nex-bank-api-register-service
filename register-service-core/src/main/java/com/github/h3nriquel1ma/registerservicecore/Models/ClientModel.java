@@ -46,7 +46,7 @@ public class ClientModel {
 
     public ClientModel(RegisterClientDTO data, String username, String password) {
         this.clientFullName = data.getNome_cliente();
-        this.clientCPF = data.getCPF_cliente();
+        this.clientCPF = data.getCpf_cliente();
         this.clientEmail = data.getEmail_cliente();
         this.clientPhone = data.getCelular_cliente();
         this.clientBirthDate = data.getData_nascimento_cliente();

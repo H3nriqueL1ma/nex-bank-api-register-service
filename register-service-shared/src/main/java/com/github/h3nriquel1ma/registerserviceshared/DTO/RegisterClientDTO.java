@@ -13,7 +13,7 @@ public class RegisterClientDTO {
     private String nome_cliente;
 
     @NotNull(message = "Client CPF cannot be null!")
-    private String CPF_cliente;
+    private String cpf_cliente;
 
     @NotNull(message = "Client Email cannot be null!")
     private String email_cliente;

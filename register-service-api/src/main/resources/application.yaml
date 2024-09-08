@@ -3,8 +3,8 @@ spring:
     name: register-service
   datasource:
     url: jdbc:postgresql://postgresql-server-database.postgres.database.azure.com:5432/nexbank-register-microservice
-    username: postgres_database_admin
-    password: xA6asdnpT8Ayh2Q
+    username:
+    password:
     driver-class-name: org.postgresql.Driver
   jpa:
     properties:

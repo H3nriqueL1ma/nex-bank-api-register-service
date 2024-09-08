@@ -49,7 +49,9 @@ public class RegisterController {
 
     // Rota de registro dos dados gerais do usuário em uma nova Sessão.
     @PostMapping("/session")
-    public ResponseEntity<Object> registerSession(HttpSession session, @RequestBody @Valid RegisterClientDTO request) {
+    public ResponseEntity<Object> registerSession(@RequestBody @Valid RegisterClientDTO request) {
+        System.out.println(request);
+
         if (!clientValidatorRequestService.isValid(request)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "Invalid Data!", "code", 400));
         }
@@ -59,11 +61,11 @@ public class RegisterController {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "Client already exists!", "code", 400));
             }
 
-            // Guardando os dados inteiros da requisição em uma sessão especificada pelo CPF do cliente.
-            dataSessionService.createDataSession("user_" + request.getCPF_cliente(), request);
+            // Armazenando os dados inteiros da requisição em uma sessão especificada pelo CPF do cliente.
+            dataSessionService.createDataSession("user_" + request.getCpf_cliente(), request);
 
-            // Guardando o CPF do cliente.
-            attributeSessionService.createAttributeSession("user_cpf", request.getCPF_cliente());
+            // Armazenando o CPF do cliente.
+            attributeSessionService.createAttributeSession("user_cpf", request.getCpf_cliente());
 
             return ResponseEntity.status(HttpStatus.OK).body(Map.of("message", "Session created successfully!", "code", 201));
         } catch (DataAccessException error) {
@@ -85,20 +87,24 @@ public class RegisterController {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "Client User already exists!", "code", 400));
             }
 
+            // Pegando o CPF do cliente armazenado localmente na sessão.
             String sessionClientCPF = (String) attributeSessionService.getSession("user_cpf");
 
             if (attributeSessionService.verify(sessionClientCPF)) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "Session Client CPF cannot be null!", "code", 400));
             }
 
+            // Pegando os dados do cliente armazenado localmente na sessão.
             RegisterClientDTO sessionClientData = (RegisterClientDTO) dataSessionService.getSession("user_" + sessionClientCPF);
 
             if (dataSessionService.verify(sessionClientData)) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "Session Client Data cannot be null!", "code", 400));
             }
 
+            // Registrando os dados de usuário (login) da requisição e dados de registro armazenados da sessão.
             registrationService.register(request, sessionClientData);
 
+            // Invalidando as sessões.
             dataSessionService.invalidateSession("user_" + sessionClientCPF);
             attributeSessionService.invalidateSession("user_cpf");
 

@@ -24,7 +24,7 @@ public class ClientInfoDataService implements VerifyInterface<RegisterClientDTO>
     @Override
     public Boolean isExisting(RegisterClientDTO request) {
         return checkClientExistenceService.check(
-                hashingService.hash(request.getCPF_cliente()),
+                hashingService.hash(request.getCpf_cliente()),
                 hashingService.hash(request.getEmail_cliente()),
                 hashingService.hash(request.getCelular_cliente())
         );

@@ -5,6 +5,8 @@ import com.github.h3nriquel1ma.registerservicecore.ServicesInterfaces.Validation
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+
 // Serviço de verificação de clientes com base em dados de registro.
 @Service
 public class CheckClientExistenceService implements CheckInterface<String> {
@@ -18,8 +20,8 @@ public class CheckClientExistenceService implements CheckInterface<String> {
 
     @Override
     public Boolean check(String... parameters) {
-        return this.clientRepository.findByClientCPF(parameters[0]).isPresent() ||
-                this.clientRepository.findByClientEmail(parameters[1]).isPresent() ||
-                this.clientRepository.findByClientPhone(parameters[2]).isPresent();
+        return clientRepository.findByClientCPF(parameters[0]).isPresent() ||
+                clientRepository.findByClientEmail(parameters[1]).isPresent() ||
+                clientRepository.findByClientPhone(parameters[2]).isPresent();
     }
 }

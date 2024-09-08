@@ -10,10 +10,10 @@ public class EmptyAttributesValidatorService implements ValidatorInterface<Regis
 
     @Override
     public Boolean isValid(RegisterClientDTO request) {
-        return request.getCPF_cliente().isEmpty() ||
-                request.getEmail_cliente().isEmpty() ||
-                request.getCelular_cliente().isEmpty() ||
-                request.getNome_cliente().isEmpty() ||
-                request.getData_nascimento_cliente().isEmpty();
+        return !request.getCpf_cliente().isEmpty() &&
+                !request.getEmail_cliente().isEmpty() &&
+                !request.getCelular_cliente().isEmpty() &&
+                !request.getNome_cliente().isEmpty() &&
+                !request.getData_nascimento_cliente().isEmpty();
     }
 }
